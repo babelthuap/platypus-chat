@@ -2,15 +2,22 @@ $(document).ready(function() {
 var chatDB = new Firebase('https://platypus-chat.firebaseio.com/');
 
 var username;
-var $username = $('#username');
 var $go       = $('#go');
 var $spinner  = $('#chatlog .loading');
+var $username = $('#username');
 
 init();
 
 
 function init() {
   $username.focus();
+
+  switch ($username.val().length) {
+    case 0: $username.val(localStorage.username);
+      break;
+    case 1: $go.prop('disabled', true);
+      break;
+  }
 
   $username.on('input', function() {
     if ($(this).val().length > 1) {
@@ -39,6 +46,7 @@ function startChat() {
   $go.prop('disabled', true);
 
   username = $username.val();
+  localStorage.username = username;
   $('#newMessage b').text('username: ' + username);
 
   firebaseInit();
