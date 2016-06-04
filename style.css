@@ -9,7 +9,7 @@ body {
   border-radius: 9px;
   border: 6px solid #AAA;
   margin: auto;
-  max-width: 347px;
+  max-width: 400px;
   max-height: 75vh;
   min-height: 25px;
   overflow: scroll;
@@ -24,6 +24,10 @@ body {
   display: inline-block;
   margin: 4px;
   padding: 4px;
+}
+
+.message em {
+  font-size: small;
 }
 
 #newMessage {

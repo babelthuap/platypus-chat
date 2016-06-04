@@ -26,6 +26,9 @@ $username.keypress(function(e) {
 $go.click(startChat);
 
 function startChat() {
+  $username.prop('disabled', true);
+  $go.prop('disabled', true);
+
   username = $username.val();
   $('#newMessage b').text('username: ' + username);
 
@@ -38,12 +41,11 @@ function startChat() {
     var $this = $(this);
     var message = $this.val();
     if (e.keyCode === 13 && message.length > 0) {
+      $this.val('');
       chatDB.push({
         user: username,
         message: message,
-        time: Date.now()
-      }).then(function() {
-        $this.val('');
+        time: Firebase.ServerValue.TIMESTAMP
       }).catch(function(err) {
         console.error('Error writing new message to Firebase: ', err);
       });
