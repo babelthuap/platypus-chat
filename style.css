@@ -3,3 +3,35 @@ body {
   font-family: serif;
   text-align: center;
 }
+
+#chatlog {
+  background-color: #DFF;
+  border-radius: 9px;
+  border: 6px solid #AAA;
+  margin: auto;
+  max-width: 347px;
+  max-height: 75vh;
+  min-height: 25px;
+  overflow: scroll;
+  padding: 4px;
+}
+
+.message {
+  background-color: #FFF;
+  border-radius: 3px;
+  border: 1px solid #000;
+  color: #060;
+  display: inline-block;
+  margin: 4px;
+  padding: 4px;
+}
+
+#newMessage {
+  color: #000;
+  display: none;
+  margin-bottom: 8px;
+}
+
+#newMessage input {
+  width: 96%;
+}
