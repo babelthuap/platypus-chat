@@ -52,8 +52,8 @@ function startChat() {
 }
 
 function firebaseInit() {
-  // load the last 12 messages and listen for new ones
-  chatDB.limitToLast(12).on('child_added', function(data) {
+  // load the last 1024 messages and listen for new ones
+  chatDB.limitToLast(1024).on('child_added', function(data) {
     var val = data.val();
 
     var $bubble = $('<div>')
