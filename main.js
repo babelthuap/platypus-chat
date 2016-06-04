@@ -40,7 +40,8 @@ function startChat() {
     if (e.keyCode === 13 && message.length > 0) {
       chatDB.push({
         user: username,
-        message: message
+        message: message,
+        time: Date.now()
       }).then(function() {
         $this.val('');
       }).catch(function(err) {
@@ -59,6 +60,11 @@ function firebaseInit() {
       .addClass('message')
       .text( val.message )
       .prepend( $('<b>').text(val.user + ': ') );
+
+    if (val.time) {
+      $bubble = $bubble.append( $('<br>') )
+          .append( $('<em>').text((new Date(val.time)).toLocaleString()) );
+    }
 
     if (val.user.replace(/\s/g, '').toLowerCase() ==
         username.replace(/\s/g, '').toLowerCase()) {
