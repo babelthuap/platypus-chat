@@ -1,31 +1,38 @@
 $(document).ready(function() {
-'use strict';
-
-var username;
 var chatDB = new Firebase('https://platypus-chat.firebaseio.com/');
 
+var username;
 var $username = $('#username');
-var $go = $('#go');
+var $go       = $('#go');
+var $loading  = $('#loading');
 
-$username.focus();
+init();
 
-$username.on('input', function() {
-  if ($(this).val().length > 1) {
-    $go.prop('disabled', false);
-  } else {
-    $go.prop('disabled', true);
-  }
-});
 
-$username.keypress(function(e) {
-  if (e.keyCode === 13 && !$go.prop('disabled')) {
-    startChat();
-  }
-});
+function init() {
+  $username.focus();
 
-$go.click(startChat);
+  $username.on('input', function() {
+    if ($(this).val().length > 1) {
+      $go.prop('disabled', false);
+    } else {
+      $go.prop('disabled', true);
+    }
+  });
+
+  $username.keypress(function(e) {
+    if (e.keyCode === 13 && !$go.prop('disabled')) {
+      startChat();
+    }
+  });
+
+  $go.show().click(startChat);
+}
+
 
 function startChat() {
+  $loading.show();
+
   $username.prop('disabled', true);
   $go.prop('disabled', true);
 
@@ -37,25 +44,35 @@ function startChat() {
   $go.closest('p').hide();
   $('#newMessage').show();
 
-  $('#newMessage input').focus().keypress(function(e) {
-    var $this = $(this);
-    var message = $this.val();
-    if (e.keyCode === 13 && message.length > 0) {
-      $this.val('');
-      chatDB.push({
-        user: username,
-        message: message,
-        time: Firebase.ServerValue.TIMESTAMP
-      }).catch(function(err) {
-        console.error('Error writing new message to Firebase: ', err);
-      });
-    }
-  });
+  $('#newMessage input').focus().keypress(sendMessage);
 }
+
+
+function sendMessage(e) {
+  var $this = $(this);
+  var message = $this.val();
+  if (e.keyCode === 13 && message.length > 0) {
+    $this.val('');
+    $loading.show();
+    $('#newMessage input').prop('disabled', true);
+
+    chatDB.push({
+      user: username,
+      message: message,
+      time: Firebase.ServerValue.TIMESTAMP
+    }).catch(function(err) {
+      console.error('Error writing new message to Firebase: ', err);
+    });
+  }
+}
+
 
 function firebaseInit() {
   // load the last 1024 messages and listen for new ones
   chatDB.limitToLast(1024).on('child_added', function(data) {
+    $loading.hide();
+    $('#newMessage input').prop('disabled', false).focus();
+
     var val = data.val();
 
     var $bubble = $('<div>')

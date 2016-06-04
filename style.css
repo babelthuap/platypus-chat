@@ -1,7 +1,11 @@
 body {
   background-color: #EFE;
-  font-family: serif;
+  font-family: sans-serif;
   text-align: center;
+}
+
+#go {
+  display: none;
 }
 
 #chatlog {
@@ -11,9 +15,17 @@ body {
   margin: auto;
   max-width: 400px;
   max-height: 75vh;
-  min-height: 25px;
+  min-height: 50px;
   overflow: scroll;
   padding: 4px;
+}
+
+#loading {
+  display: none;
+  height: 60px;
+  left: calc(50% - 30px);
+  position: absolute;
+  z-index: 9999;
 }
 
 .message {

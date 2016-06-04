@@ -10,11 +10,12 @@
 <body>
 <div>
   <h1>Platypus Chat (Capi, too!)</h1>
-  <p>choose a username: <input type="text" id="username" placeholder="e.g. Capi"> <button id="go" disabled>Go!</button></p>
+  <p>choose a username: <input type="text" id="username" placeholder="e.g. the Capi"> <button id="go" disabled>Go!</button></p>
   <hr>
 </div>
   <div id="chatlog">
-    <div class="message" id="newMessage"><b></b> <input type="text"></div>
+    <img src="loading.gif" alt="LOADING..." id="loading">
+    <div class="message" id="newMessage"><b></b> <input type="text" disabled></div>
   </div>
 
   <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
