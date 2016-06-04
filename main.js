@@ -88,7 +88,7 @@ function firebaseInit() {
     if (val.user.replace(/\s/g, '').toLowerCase() ==
         username.replace(/\s/g, '').toLowerCase()) {
       $bubble = $('<div>').css('text-align', 'right')
-                          .append($bubble.css('color', '#006'));
+                          .append($bubble.css('color', '#060'));
     } else {
       $bubble = $('<div>').css('text-align', 'left')
                           .append($bubble);
