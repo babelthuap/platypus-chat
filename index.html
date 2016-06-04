@@ -8,13 +8,14 @@
 </head>
 
 <body>
-<div>
-  <h1>Platypus Chat (Capi, too!)</h1>
-  <p>choose a username: <input type="text" id="username" placeholder="e.g. the Capi"> <button id="go" disabled>Go!</button></p>
-  <hr>
-</div>
+  <div id="header">
+    <h1>Platypus Chat (Capi, too!)</h1>
+    <p>choose a username: <input type="text" id="username" placeholder="e.g. the Capi"> <img src="loading.gif" alt="LOADING..." class="loading"><img src="loading.gif" alt="LOADING..." class="loading"> <button id="go" disabled>Go!</button></p>
+    <hr>
+  </div>
+
   <div id="chatlog">
-    <img src="loading.gif" alt="LOADING..." id="loading">
+    <img src="loading.gif" alt="LOADING..." class="loading">
     <div class="message" id="newMessage"><b></b> <input type="text" disabled></div>
   </div>
 

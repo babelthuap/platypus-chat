@@ -4,7 +4,7 @@ var chatDB = new Firebase('https://platypus-chat.firebaseio.com/');
 var username;
 var $username = $('#username');
 var $go       = $('#go');
-var $loading  = $('#loading');
+var $spinner  = $('#chatlog .loading');
 
 init();
 
@@ -26,12 +26,14 @@ function init() {
     }
   });
 
+  $('#header .loading').hide();
+
   $go.show().click(startChat);
 }
 
 
 function startChat() {
-  $loading.show();
+  $spinner.show();
 
   $username.prop('disabled', true);
   $go.prop('disabled', true);
@@ -53,7 +55,7 @@ function sendMessage(e) {
   var message = $this.val();
   if (e.keyCode === 13 && message.length > 0) {
     $this.val('');
-    $loading.show();
+    $spinner.show();
     $('#newMessage input').prop('disabled', true);
 
     chatDB.push({
@@ -70,7 +72,7 @@ function sendMessage(e) {
 function firebaseInit() {
   // load the last 1024 messages and listen for new ones
   chatDB.limitToLast(1024).on('child_added', function(data) {
-    $loading.hide();
+    $spinner.hide();
     $('#newMessage input').prop('disabled', false).focus();
 
     var val = data.val();
