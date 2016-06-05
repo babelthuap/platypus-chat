@@ -78,8 +78,8 @@ function sendMessage(e) {
 
 
 function firebaseInit() {
-  // load the last 1024 messages and listen for new ones
-  chatDB.limitToLast(1024).on('child_added', function(data) {
+  // load the last 256 messages and listen for new ones
+  chatDB.limitToLast(256).on('child_added', function(data) {
     $spinner.hide();
     $('#newMessage input').prop('disabled', false).focus();
 
@@ -91,16 +91,17 @@ function firebaseInit() {
       .prepend( $('<b>').text(val.user + ': ') );
 
     if (val.time) {
-      $bubble = $bubble.append( $('<br>') )
-          .append( $('<em>').text((new Date(val.time)).toLocaleString()) );
+      $bubble = $bubble.append([
+        $('<br>'),
+        $('<em>').text((new Date(val.time)).toLocaleString())
+      ]);
     }
 
-    if (val.user.replace(/\s/g, '').toLowerCase() ==
-        username.replace(/\s/g, '').toLowerCase()) {
-      $bubble = $('<div>').css('text-align', 'right')
+    if (val.user.replace(/\s/g, '').toLowerCase() == username.replace(/\s/g, '').toLowerCase()) {
+      $bubble = $('<div>').addClass('right-msg')
                           .append($bubble.css('color', '#060'));
     } else {
-      $bubble = $('<div>').css('text-align', 'left')
+      $bubble = $('<div>').addClass('left-msg')
                           .append($bubble);
     }
 

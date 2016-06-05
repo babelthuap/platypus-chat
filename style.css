@@ -1,6 +1,6 @@
 body {
   background-color: #EFE;
-  font-family: Helvetica sans-serif;
+  font-family: Helvetica, sans-serif;
   text-align: center;
 }
 
@@ -33,13 +33,25 @@ body {
   z-index: 9999;
 }
 
+.left-msg {
+  margin-right: 32px;
+  text-align: left;
+}
+
+.right-msg {
+  margin-left: 32px;
+  text-align: right;
+}
+
 .message {
   background-color: #FFF;
   border-radius: 3px;
   border: 1px solid #000;
   color: #006;
   display: inline-block;
-  margin: 4px;
+  margin: 1px 4px 1px 4px;
+  max-width: 350px;
+  overflow: scroll;
   padding: 4px;
 }
 
@@ -51,7 +63,8 @@ body {
 #newMessage {
   color: #000;
   display: none;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  max-width: none;
 }
 
 #newMessage input {
