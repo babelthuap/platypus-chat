@@ -76,7 +76,7 @@ input:focus {
   width: 96%;
 }
 
-@media screen {
+@media only screen and (max-device-width: 768px) {
   #chatlog {
     max-height: initial;
     overflow: initial;
