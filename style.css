@@ -4,11 +4,6 @@ body {
   text-align: center;
 }
 
-input[type='text'],
-input:focus {
-  font-size: 16px;
-}
-
 #header .loading {
   height: 14px;
   width: 17px;
@@ -80,6 +75,11 @@ input:focus {
   #chatlog {
     max-height: initial;
     overflow: initial;
+  }
+
+  input[type='text'],
+  input:focus {
+    font-size: 16px;
   }
 
   #newMessage input {

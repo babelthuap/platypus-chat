@@ -1,5 +1,7 @@
 $(document).ready(function() {
 var chatDB = new Firebase('https://platypus-chat.firebaseio.com/');
+var room = window.location.search.slice(1) || 'public';
+chatDB = chatDB.child(room);
 
 var username;
 var $go       = $('#go');
