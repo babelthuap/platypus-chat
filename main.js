@@ -15,7 +15,7 @@ function init() {
   $username.focus();
 
   switch ($username.val().length) {
-    case 0: $username.val(localStorage.username);
+    case 0: $username.val(localStorage[username + room]);
       break;
     case 1: $go.prop('disabled', true);
       break;
@@ -48,7 +48,7 @@ function startChat() {
   $go.prop('disabled', true);
 
   username = $username.val();
-  localStorage.username = username;
+  localStorage[username + room] = username;
   $('#newMessage b').text('username: ' + username);
 
   firebaseInit();
