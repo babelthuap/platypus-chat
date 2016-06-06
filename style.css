@@ -4,6 +4,11 @@ body {
   text-align: center;
 }
 
+input[type='text'],
+input:focus {
+  font-size: 16px;
+}
+
 #header .loading {
   height: 14px;
   width: 17px;
@@ -23,6 +28,13 @@ body {
   min-height: 50px;
   overflow: scroll;
   padding: 4px;
+}
+
+@media screen {
+  #chatlog {
+    max-height: initial;
+    overflow: initial;
+  }
 }
 
 #chatlog .loading {
