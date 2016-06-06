@@ -30,13 +30,6 @@ input:focus {
   padding: 4px;
 }
 
-@media screen {
-  #chatlog {
-    max-height: initial;
-    overflow: initial;
-  }
-}
-
 #chatlog .loading {
   display: none;
   height: 60px;
@@ -81,4 +74,15 @@ input:focus {
 
 #newMessage input {
   width: 96%;
+}
+
+@media screen {
+  #chatlog {
+    max-height: initial;
+    overflow: initial;
+  }
+
+  #newMessage input {
+    width: 92%;
+  }
 }
