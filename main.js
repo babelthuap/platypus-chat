@@ -119,7 +119,7 @@ function formatDate(dateInMs) {
   var date = new Date(dateInMs);
   var age = Date.now() - dateInMs;
   if (age < msInDay) {
-    return 'Today, ' + date.toLocaleTimeString();
+    return dayNames[date.getDay()] + ', ' + date.toLocaleTimeString();
   } else if (age < msInWeek) {
     var day = dayNames[date.getDay()];
     var time = (Number(date.toTimeString().split(':')[0]) < 12) ? 'morning' : 'afternoon'
