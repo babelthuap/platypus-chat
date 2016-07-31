@@ -7,6 +7,9 @@ var username;
 var $go       = $('#go');
 var $spinner  = $('#chatlog .loading');
 var $username = $('#username');
+var msInDay   = 24 * 60 * 60 * 1000;
+var msInWeek  = 7 * msInDay;
+var dayNames  = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 init();
 
@@ -95,7 +98,7 @@ function firebaseInit() {
     if (val.time) {
       $bubble = $bubble.append([
         $('<br>'),
-        $('<em>').text((new Date(val.time)).toLocaleString())
+        $('<em>').text(formatDate(val.time))
       ]);
     }
 
@@ -109,5 +112,20 @@ function firebaseInit() {
 
     $('#newMessage').after($bubble);
   });
+}
+
+
+function formatDate(dateInMs) {
+  var date = new Date(dateInMs);
+  var age = Date.now() - dateInMs;
+  if (age < msInDay) {
+    return 'Today, ' + date.toLocaleTimeString();
+  } else if (age < msInWeek) {
+    var day = dayNames[date.getDay()];
+    var time = (Number(date.toTimeString().split(':')[0]) < 12) ? 'morning' : 'afternoon'
+    return day + ' ' + time;
+  } else {
+    return date.toLocaleString();
+  }
 }
 });
