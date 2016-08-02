@@ -118,10 +118,11 @@ function firebaseInit() {
 function formatDate(dateInMs) {
   var date = new Date(dateInMs);
   var age = Date.now() - dateInMs;
+  var isSameDayOfWeek = (new Date()).getDay() === date.getDay();
   if (age < msInDay) {
-    var day = ((new Date()).getDay() === date.getDay()) ? 'Today' : dayNames[date.getDay()];
+    var day = isSameDayOfWeek ? 'Today' : dayNames[date.getDay()];
     return day + ', ' + date.toLocaleTimeString();
-  } else if (age < msInWeek) {
+  } else if (age < msInWeek && !isSameDayOfWeek) {
     var day = dayNames[date.getDay()];
     var time = (Number(date.toTimeString().split(':')[0]) < 12) ? 'morning' : 'afternoon'
     return day + ' ' + time;
