@@ -10,6 +10,7 @@ var $username = $('#username');
 var msInDay   = 24 * 60 * 60 * 1000;
 var msInWeek  = 7 * msInDay;
 var dayNames  = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var timestampCallbacks = [];
 
 init();
 
@@ -60,6 +61,13 @@ function startChat() {
   $('#newMessage').show();
 
   $('#newMessage input').focus().keypress(sendMessage);
+
+  // Update all timestamps once every 5 minutes.
+  window.setInterval(function() {
+    timestampCallbacks.forEach(function(callback) {
+      callback();
+    });
+  }, 300000);
 }
 
 
@@ -98,8 +106,12 @@ function firebaseInit() {
     if (val.time) {
       $bubble = $bubble.append([
         $('<br>'),
-        $('<em>').text(formatDate(val.time))
+        $('<em>').attr('id', val.time).text(formatDate(val.time))
       ]);
+
+      timestampCallbacks.push(function() {
+        $('#' + val.time).text(formatDate(val.time));
+      });
     }
 
     if (val.user.replace(/\s/g, '').toLowerCase() == username.replace(/\s/g, '').toLowerCase()) {
